@@ -40,6 +40,45 @@ const openResumeInNewWindow = () => {
                 box-shadow: 0 0 20px rgba(0,0,0,0.1);
                 border-radius: 8px;
                 overflow: hidden;
+                position: relative;
+            }
+            
+            /* Action buttons - hide when printing */
+            .action-buttons {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                display: flex;
+                gap: 10px;
+                z-index: 1000;
+            }
+            
+            .action-btn {
+                background: #2563eb;
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: background 0.3s;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .action-btn:hover {
+                background: #1d4ed8;
+            }
+            
+            .download-btn {
+                background: #10b981;
+            }
+            
+            .download-btn:hover {
+                background: #059669;
             }
             
             .header {
@@ -233,13 +272,78 @@ const openResumeInNewWindow = () => {
                 margin: 20px 0;
             }
             
-            @media print {
-                body { padding: 0; background: white; }
-                .resume-container { box-shadow: none; }
-            }
+            /* Print styles */
+/* Print styles */
+@media print {
+    body { 
+        padding: 0; 
+        background: white; 
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+    .resume-container { 
+        box-shadow: none; 
+        border-radius: 0;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+    .action-buttons {
+        display: none !important;
+    }
+    .section {
+        page-break-inside: avoid;
+    }
+    .header {
+        background: #2563eb !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .header h1, .header .subtitle, .contact-info {
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+    .contact-info span {
+        background: rgba(255,255,255,0.3) !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+    .section-title {
+        color: #2563eb !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+    .status-badge {
+        background: #10b981 !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+    .project-item {
+        background: #f8f9fa !important;
+        border-left: 4px solid #2563eb !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+    .publications {
+        background: #f0f9ff !important;
+        border: 1px solid #bfdbfe !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+}
         </style>
     </head>
     <body>
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-btn" onclick="window.print()">
+                📄 Print / Save as PDF
+            </button>
+            
+        </div>
+        
         <div class="resume-container">
             <div class="header">
                 <h1>KRISHNA ARYAL</h1>
@@ -331,7 +435,7 @@ const openResumeInNewWindow = () => {
                     </div>
                     
                     <div class="project-item">
-                        <div class="project-title">Healthcare Fraud Detection System (Georgia Tech)</div>
+                        <div class="project-title">Healthcare Fraud Detection System (Georgia Tech)</div>  
                         <div class="project-tech">Technologies: Python, Scikit-learn, Ensemble Methods, ROC Analysis</div>
                         <div class="project-desc">
                             Built advanced ensemble machine learning model for insurance fraud detection achieving 94% precision and 92% recall using sophisticated feature engineering and cross-validation techniques.
@@ -379,12 +483,34 @@ const openResumeInNewWindow = () => {
         </div>
         
         <script>
-            // Add print functionality
+            // Print functionality
             document.addEventListener('keydown', function(e) {
                 if (e.ctrlKey && e.key === 'p') {
                     window.print();
                 }
             });
+            
+            // Download resume function
+            
+            function downloadResume() {
+                // Show user instructions
+                alert('💡 For best results:\\n\\n1. In the print dialog, select "More settings"\\n2. Check "Background graphics"\\n3. Save as PDF or print\\n\\nThis ensures colors and styling are preserved!');
+                
+                // Hide buttons for clean PDF
+                const buttons = document.querySelector('.action-buttons');
+                buttons.style.display = 'none';
+                
+                // Trigger print dialog
+                window.print();
+                
+                // Show buttons again after print dialog
+                setTimeout(() => {
+                    buttons.style.display = 'flex';
+                }, 1000);
+            }
+            
+            // Add a message for users
+            console.log('💡 Tip: Use Ctrl+P to print or save as PDF anytime!');
         </script>
     </body>
     </html>
