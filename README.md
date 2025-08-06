@@ -19,7 +19,7 @@
 <img src="https://user-images.githubusercontent.com/placeholder/mobile-preview.png" width="300" alt="Mobile Preview">
 
 ### 🌙 Dark Mode
-![Dark Mode Preview](https://user-images.githubusercontent.com/placeholder/dark-mode-preview.png)
+<img width="1674" height="1226" alt="Image" src="https://github.com/user-attachments/assets/0f5c72ac-5d9b-4c5c-811f-0c450a916d6d" />
 
 ### 📄 Interactive Resume Viewer
 <img width="1010" height="1308" alt="Image" src="https://github.com/user-attachments/assets/18cca587-9204-40e4-b350-2e6494aceab7" />"
