@@ -6,15 +6,41 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/krishna-aryal1)
 [![Google Scholar](https://img.shields.io/badge/Google%20Scholar-Publications-4285F4?style=for-the-badge&logo=google-scholar)](https://scholar.google.com/citations?user=fsWWqa0AAAAJ)
 
-## 🚀 About This Project
+## 📸 Preview
 
-This is my professional portfolio website showcasing my experience as a Data Scientist with a PhD in Physics. The site features:
+### 🖥️ Desktop View
+![Desktop Preview](https://user-images.githubusercontent.com/placeholder/desktop-preview.png)
 
-- **Modern React-based design** with dark/light mode toggle
-- **Interactive resume viewer** with print/download functionality  
-- **Comprehensive project portfolio** highlighting data science work
-- **Research publications** and academic achievements
-- **Responsive design** optimized for all devices
+### 📱 Mobile View
+<img src="https://user-images.githubusercontent.com/placeholder/mobile-preview.png" width="300" alt="Mobile Preview">
+
+### 🌙 Dark Mode
+![Dark Mode Preview](https://user-images.githubusercontent.com/placeholder/dark-mode-preview.png)
+
+### 📄 Interactive Resume Viewer
+![Resume Viewer Preview](https://user-images.githubusercontent.com/placeholder/resume-preview.png)
+
+> **Live Demo**: [https://kraryal.github.io/Resume_krishna/](https://kraryal.github.io/Resume_krishna/)
+
+## ✨ Key Features Showcase
+
+### 🎨 Modern Design System
+- **Responsive Layout** - Seamless experience across all devices
+- **Dark/Light Mode Toggle** - User preference support
+- **Smooth Animations** - Professional transitions and micro-interactions
+- **Clean Typography** - Optimized for readability
+
+### 📊 Interactive Elements
+- **Dynamic Navigation** - Active section highlighting
+- **Skill Progress Bars** - Animated proficiency indicators  
+- **Project Cards** - Hover effects and detailed descriptions
+- **Resume Viewer** - In-browser PDF viewing with download option
+
+### 🚀 Performance Optimized
+- **Fast Loading** - Vite-powered build system
+- **SEO Friendly** - Proper meta tags and structure
+- **Accessible** - WCAG 2.1 compliant
+- **Cross-Browser Compatible** - Works on all modern browsers
 
 ## 🛠️ Tech Stack
 
@@ -23,6 +49,16 @@ This is my professional portfolio website showcasing my experience as a Data Sci
 - **Icons**: Lucide React
 - **Deployment**: GitHub Pages
 - **Build Tool**: Vite
+
+## 🎯 About This Project
+
+This is my professional portfolio website showcasing my experience as a Data Scientist with a PhD in Physics. The site features:
+
+- **Modern React-based design** with dark/light mode toggle
+- **Interactive resume viewer** with print/download functionality  
+- **Comprehensive project portfolio** highlighting data science work
+- **Research publications** and academic achievements
+- **Responsive design** optimized for all devices
 
 ## 📊 Featured Projects
 
