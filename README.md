@@ -9,7 +9,7 @@
 ## 📸 Preview
 
 ### 🖥️ Desktop View
-![Desktop Preview]("https://github.com/user-attachments/assets/83f753cc-30b5-44a7-9fdb-9f1a0623bddc" )
+![Desktop Preview]("<img width="1695" height="1244" alt="Image" src="https://github.com/user-attachments/assets/5876707f-98d2-4b0c-840a-f0a782411d18" />" )
 
 ### 📱 Mobile View
 <img src="https://user-images.githubusercontent.com/placeholder/mobile-preview.png" width="300" alt="Mobile Preview">
