@@ -18,7 +18,7 @@
 ![Dark Mode Preview](https://user-images.githubusercontent.com/placeholder/dark-mode-preview.png)
 
 ### 📄 Interactive Resume Viewer
-![Resume Viewer Preview](<img width="1010" height="1308" alt="Image" src="https://github.com/user-attachments/assets/18cca587-9204-40e4-b350-2e6494aceab7" />)
+![Resume Viewer Preview]("<img width="1010" height="1308" alt="Image" src="https://github.com/user-attachments/assets/18cca587-9204-40e4-b350-2e6494aceab7" />")
 
 > **Live Demo**: [https://kraryal.github.io/Resume_krishna/](https://kraryal.github.io/Resume_krishna/)
 
