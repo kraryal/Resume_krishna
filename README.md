@@ -3,7 +3,7 @@
 🎯 **Data Scientist | PhD in Physics | Published Researcher**
 
 [![Live Website](https://img.shields.io/badge/🌐%20Live%20Website-Visit%20Portfolio-blue?style=for-the-badge)](https://kraryal.github.io/Resume_krishna/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/krishna-aryal)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/krishna-aryal1)
 [![Google Scholar](https://img.shields.io/badge/Google%20Scholar-Publications-4285F4?style=for-the-badge&logo=google-scholar)](https://scholar.google.com/citations?user=fsWWqa0AAAAJ)
 
 ## 🚀 About This Project
