@@ -3,61 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishna Aryal - Data Scientist & Analyst</title>
+    <title>Krishna Aryal - Data Scientist Resume</title>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script src="https://cdn.tailwindcss.com/3.3.0"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.0"></script>
     
-    <!-- Custom Tailwind Configuration -->
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    animation: {
-                        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'bounce': 'bounce 1s infinite',
+                    colors: {
+                        'nav-blue': '#2563eb',
+                        'purple-custom': '#9333ea'
                     }
                 }
             }
         }
     </script>
     
-    <!-- Additional Custom Styles -->
     <style>
-        .dark { color-scheme: dark; }
-        .bg-gradient-to-r { background: linear-gradient(to right, var(--tw-gradient-stops)); }
-        .from-blue-600 { --tw-gradient-from: #2563eb; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(37, 99, 235, 0)); }
-        .to-purple-600 { --tw-gradient-to: #9333ea; }
-        .bg-clip-text { -webkit-background-clip: text; background-clip: text; }
-        .text-transparent { color: transparent; }
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         
-        /* Smooth scrolling */
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .dark .glass-effect {
+            background: rgba(31, 41, 55, 0.9);
+            border: 1px solid rgba(75, 85, 99, 0.3);
+        }
+        
         html { scroll-behavior: smooth; }
         
-        /* Custom gradients */
-        .gradient-blue-purple {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        /* Hover effects */
-        .hover-scale:hover {
-            transform: scale(1.05);
+        .hover-lift:hover {
+            transform: translateY(-5px);
             transition: all 0.3s ease;
-        }
-        
-        /* Glass effect */
-        .glass {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .dark .glass {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
@@ -66,194 +55,90 @@
     
     <script type="text/babel">
         const { useState, useEffect } = React;
-        const { Mail, Phone, MapPin, Download, Github, Linkedin, ExternalLink, 
-                ChevronRight, CheckCircle, User, Code2, Database, BarChart3, 
-                Award, Building, Calendar, Sun, Moon, FileText, Contact2,
-                GraduationCap, BookOpenText, BriefcaseBusiness } = lucide;
-
-        // Download functions
+        
+        // GitHub Pages compatible paths
+        const getAssetPath = (filename) => {
+            return window.location.hostname.includes('github.io') 
+                ? `/Resume_krishna/${filename}` 
+                : `./${filename}`;
+        };
+        
         const downloadResume = () => {
             const link = document.createElement('a');
-            link.href = './krishna-aryal-resume.pdf';
-            link.download = 'Krishna_Aryal_Resume.pdf';
+            link.href = getAssetPath('krishna-aryal-resume.pdf');
+            link.download = 'Krishna_Aryal_Data_Scientist_Resume.pdf';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         };
 
         const viewResume = () => {
-            window.open('./krishna-aryal-resume.pdf', '_blank');
+            window.open(getAssetPath('krishna-aryal-resume.pdf'), '_blank');
         };
 
-        // Main Component
         function KrishnaResume() {
             const [darkMode, setDarkMode] = useState(false);
             const [activeSection, setActiveSection] = useState('about');
             const [showDownloadOptions, setShowDownloadOptions] = useState(false);
 
-            useEffect(() => {
-                const handleScroll = () => {
-                    const sections = ['about', 'experience', 'skills', 'education', 'projects', 'publications', 'contact'];
-                    const scrollPosition = window.scrollY + 100;
-
-                    for (const section of sections) {
-                        const element = document.getElementById(section);
-                        if (element) {
-                            const offsetTop = element.offsetTop;
-                            const offsetBottom = offsetTop + element.offsetHeight;
-                            
-                            if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-                                setActiveSection(section);
-                                break;
-                            }
-                        }
-                    }
-                };
-
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
-
-            const sections = [
-                { id: 'about', icon: React.createElement(User, {className: "w-4 h-4"}), label: 'About' },
-                { id: 'experience', icon: React.createElement(BriefcaseBusiness, {className: "w-4 h-4"}), label: 'Experience' },
-                { id: 'skills', icon: React.createElement(Code2, {className: "w-4 h-4"}), label: 'Skills' },
-                { id: 'education', icon: React.createElement(GraduationCap, {className: "w-4 h-4"}), label: 'Education' },
-                { id: 'projects', icon: React.createElement(FileText, {className: "w-4 h-4"}), label: 'Projects' },
-                { id: 'publications', icon: React.createElement(Award, {className: "w-4 h-4"}), label: 'Publications' },
-                { id: 'contact', icon: React.createElement(Contact2, {className: "w-4 h-4"}), label: 'Contact' }
-            ];
-
-            const skills = {
-                "Programming & Data Analysis": [
-                    { name: "Python (Pandas, NumPy, scikit-learn)", level: 95 },
-                    { name: "SQL (joins, CTEs, window functions)", level: 90 },
-                    { name: "R Programming", level: 85 },
-                    { name: "Statistical Analysis", level: 95 }
-                ],
-                "Machine Learning & Analytics": [
-                    { name: "Regression & Classification", level: 90 },
-                    { name: "Model Evaluation (CV, metrics)", level: 90 },
-                    { name: "Feature Engineering", level: 85 },
-                    { name: "Data Cleaning & EDA", level: 95 }
-                ],
-                "Visualization & Tools": [
-                    { name: "Matplotlib, Seaborn", level: 85 },
-                    { name: "Power BI, Tableau", level: 80 },
-                    { name: "Jupyter, Git/GitHub", level: 90 },
-                    { name: "Linux, Excel, LaTeX", level: 85 }
-                ]
-            };
-
-            const experiences = [
-                {
-                    title: "Graduate Researcher (Computational Physics)",
-                    company: "Kent State University",
-                    location: "Kent, OH",
-                    period: "2019 - 2024",
-                    type: "Research Position",
-                    achievements: [
-                        "Applied statistical modeling and numerical simulation to dense-matter problems with 95%+ accuracy",
-                        "Authored 9 peer-reviewed publications in high-impact journals (Physical Review D, Universe)",
-                        "Wrote data-processing scripts and analysis notebooks for terabyte-scale datasets",
-                        "Presented findings at 15+ international conferences with clear visualizations",
-                        "Collaborated with cross-institutional teams on computational physics research"
-                    ],
-                    technologies: ["Python", "Fortran", "Statistical Analysis", "Machine Learning", "Data Visualization"]
-                },
-                {
-                    title: "Research & Teaching Assistant",
-                    company: "University of Massachusetts Boston",
-                    location: "Boston, MA",
-                    period: "2013 - 2015",
-                    type: "Research & Teaching",
-                    achievements: [
-                        "Designed and simulated optical waveguide models using advanced computational methods",
-                        "Assisted course labs and grading with clear documentation and feedback systems",
-                        "Supported students with data analysis and report writing, improving result interpretation"
-                    ],
-                    technologies: ["MATLAB", "Lumerical", "Optical Design", "Data Analysis"]
-                }
-            ];
-
-            const projects = [
-                {
-                    title: "Comprehensive Cancer Patient Analysis",
-                    description: "Cleaned and merged multi-year cancer datasets with validation for consistency. Built feature pipelines with encoding, imputation, and scaling.",
-                    technologies: ["Python", "Pandas", "NumPy", "scikit-learn"],
-                    highlights: ["Multi-year datasets", "Feature engineering", "Cross-validation"],
-                    link: "https://github.com/kraryal/Comprehensive-Cancer-Patient-Analysis"
-                },
-                {
-                    title: "Indian Bank SQL Database Design & Analytics",
-                    description: "Modeled normalized database with foreign keys. Wrote optimized views and stored procedures with advanced indexing.",
-                    technologies: ["SQL Server", "T-SQL", "Power BI", "ETL"],
-                    highlights: ["Normalized design", "Query optimization", "Business dashboards"],
-                    link: "https://github.com/kraryal/Indian-Bank-Case-Study"
-                },
-                {
-                    title: "Grid Disruption Analysis",
-                    description: "Analyzed power-outage datasets with time series and geospatial features. Created visual reports for temporal clustering.",
-                    technologies: ["Python", "Time Series", "Geo Visualization"],
-                    highlights: ["Pattern analysis", "Geospatial visualization", "Infrastructure insights"],
-                    link: "https://github.com/kraryal/Grid_Disruption_Analysis"
-                }
-            ];
-
             return (
-                <div className={`min-h-screen transition-all duration-500 ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
-                    {/* Fixed Header */}
-                    <div className="fixed top-4 right-4 z-50 flex gap-2">
+                <div className={`min-h-screen transition-all duration-300 ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-gradient-to-br from-gray-50 to-blue-50 text-gray-900'}`}>
+                    
+                    {/* Floating Action Buttons */}
+                    <div className="fixed top-6 right-6 z-50 flex gap-3">
                         <div className="relative">
                             <button 
                                 onClick={() => setShowDownloadOptions(!showDownloadOptions)}
-                                className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 hover-scale"
-                                title="Download Options"
+                                className="p-4 rounded-full bg-blue-600 text-white shadow-xl hover:shadow-2xl hover:bg-blue-700 transition-all duration-300 hover-lift glass-effect"
                             >
-                                {React.createElement(Download, {className: "h-5 w-5"})}
-                                {React.createElement(ChevronRight, {className: `h-4 w-4 transition-transform ${showDownloadOptions ? 'rotate-90' : ''}`})}
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
                             </button>
                             
                             {showDownloadOptions && (
-                                <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 glass">
+                                <div className="absolute right-0 mt-3 w-72 glass-effect rounded-xl shadow-2xl border border-gray-200 dark:border-gray-600 py-2 animate-in slide-in-from-top-2 duration-200">
                                     <button
-                                        onClick={() => {
-                                            viewResume();
-                                            setShowDownloadOptions(false);
-                                        }}
-                                        className="w-full px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 transition-colors"
+                                        onClick={() => { viewResume(); setShowDownloadOptions(false); }}
+                                        className="w-full px-6 py-4 text-left hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-4 transition-colors"
                                     >
-                                        {React.createElement(FileText, {className: "w-5 h-5 text-blue-600"})}
+                                        <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                                            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                            </svg>
+                                        </div>
                                         <div>
-                                            <div className="font-medium">View Resume PDF</div>
-                                            <div className="text-sm text-gray-500">Opens in new tab</div>
+                                            <div className="font-semibold text-gray-900 dark:text-white">View Resume</div>
+                                            <div className="text-sm text-gray-500">Opens PDF in new tab</div>
                                         </div>
                                     </button>
                                     
                                     <button
-                                        onClick={() => {
-                                            downloadResume();
-                                            setShowDownloadOptions(false);
-                                        }}
-                                        className="w-full px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 transition-colors"
+                                        onClick={() => { downloadResume(); setShowDownloadOptions(false); }}
+                                        className="w-full px-6 py-4 text-left hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-4 transition-colors"
                                     >
-                                        {React.createElement(Download, {className: "w-5 h-5 text-green-600"})}
+                                        <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                                            <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                            </svg>
+                                        </div>
                                         <div>
-                                            <div className="font-medium">Download Resume</div>
-                                            <div className="text-sm text-gray-500">PDF format</div>
+                                            <div className="font-semibold text-gray-900 dark:text-white">Download Resume</div>
+                                            <div className="text-sm text-gray-500">Save PDF to device</div>
                                         </div>
                                     </button>
                                     
                                     <button
-                                        onClick={() => {
-                                            window.open('https://scholar.google.com/citations?user=fsWWqa0AAAAJ&hl=en&oi=ao', '_blank');
-                                            setShowDownloadOptions(false);
-                                        }}
-                                        className="w-full px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-3 transition-colors"
+                                        onClick={() => { window.open('https://scholar.google.com/citations?user=fsWWqa0AAAAJ', '_blank'); setShowDownloadOptions(false); }}
+                                        className="w-full px-6 py-4 text-left hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-4 transition-colors"
                                     >
-                                        {React.createElement(Award, {className: "w-5 h-5 text-purple-600"})}
+                                        <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                                            <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                            </svg>
+                                        </div>
                                         <div>
-                                            <div className="font-medium">Google Scholar</div>
+                                            <div className="font-semibold text-gray-900 dark:text-white">Google Scholar</div>
                                             <div className="text-sm text-gray-500">9 publications</div>
                                         </div>
                                     </button>
@@ -263,333 +148,130 @@
                         
                         <button 
                             onClick={() => setDarkMode(!darkMode)} 
-                            className="p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 hover-scale"
+                            className="p-4 rounded-full glass-effect shadow-xl hover:shadow-2xl transition-all duration-300 hover-lift"
                         >
-                            {darkMode ? React.createElement(Sun, {className: "h-5 w-5 text-yellow-500"}) : React.createElement(Moon, {className: "h-5 w-5 text-gray-700"})}
+                            {darkMode ? (
+                                <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                                </svg>
+                            ) : (
+                                <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fillRule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clipRule="evenodd" />
+                                </svg>
+                            )}
                         </button>
                     </div>
 
-                    {/* Navigation */}
-                    <nav className="fixed top-0 left-0 w-full bg-white dark:bg-gray-800 shadow-sm z-40 border-b border-gray-200 dark:border-gray-700 glass">
-                        <ul className="flex justify-center space-x-8 py-4 text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {sections.map((section) => (
-                                <li key={section.id}>
-                                    <a 
-                                        href={`#${section.id}`} 
-                                        className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover-scale ${
-                                            activeSection === section.id 
-                                                ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20' 
-                                                : 'hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-800'
-                                        }`}
-                                    >
-                                        {section.icon} {section.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
-
-                    <div className="pt-20 px-4 max-w-6xl mx-auto space-y-20">
+                    {/* Main Content */}
+                    <div className="relative">
                         {/* Hero Section */}
-                        <section id="about" className="py-20">
+                        <section className="min-h-screen flex items-center justify-center px-6">
                             <div className="max-w-6xl mx-auto">
                                 <div className="text-center mb-16">
-                                    <h1 className="text-5xl font-bold mb-4" style={{background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent'}}>
+                                    <h1 className="text-7xl font-bold mb-6 gradient-text">
                                         KRISHNA ARYAL
                                     </h1>
-                                    <div className="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-8">
-                                        Data Scientist & Analyst with 9 Publications
-                                    </div>
+                                    <p className="text-3xl font-light text-gray-600 dark:text-gray-300 mb-8">
+                                        Data Scientist & Computational Analyst
+                                    </p>
+                                    <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                                        PhD in Computational Physics • 9 Publications • Expert in ML & Statistical Modeling
+                                    </p>
                                 </div>
 
-                                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-12 hover:shadow-xl transition-all duration-300">
-                                    <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-                                        Professional Summary
-                                        <div className="w-16 h-1 bg-blue-500 mx-auto mt-4"></div>
-                                    </h2>
-                                    
-                                    <div className="flex flex-col lg:flex-row items-start gap-12">
-                                        <div className="flex-shrink-0">
-                                            <div className="relative">
-                                                <img 
-                                                    src="./profile-new.jpg" 
-                                                    alt="Krishna Aryal" 
-                                                    className="w-64 h-64 rounded-full object-cover object-center border-4 border-blue-600 dark:border-blue-400 shadow-2xl hover-scale"
-                                                />
-                                                <div className="absolute -bottom-3 -right-3 bg-green-500 w-12 h-12 rounded-full border-4 border-white dark:border-gray-800 flex items-center justify-center">
-                                                    <span className="text-white text-xl">🟢</span>
-                                                </div>
+                                {/* Profile Card */}
+                                <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-12 glass-effect hover-lift">
+                                    <div className="flex flex-col lg:flex-row items-center gap-12">
+                                        {/* Profile Image */}
+                                        <div className="relative">
+                                            <img 
+                                                src={getAssetPath('profile-new.jpg')} 
+                                                alt="Krishna Aryal" 
+                                                className="w-80 h-80 rounded-full object-cover border-8 border-blue-600 shadow-2xl hover-lift"
+                                            />
+                                            <div className="absolute -bottom-4 -right-4 bg-green-500 text-white text-2xl w-16 h-16 rounded-full flex items-center justify-center border-4 border-white dark:border-gray-800 shadow-lg">
+                                                🟢
                                             </div>
                                         </div>
 
-                                        <div className="flex-1 space-y-6">
-                                            <div className="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 rounded-r-lg">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="bg-green-500 w-3 h-3 rounded-full animate-pulse"></div>
-                                                    <span className="text-green-700 dark:text-green-300 font-semibold">
-                                                        🟢 US Permanent Resident • Available Immediately • Open to Relocation
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                                                <strong>Data Scientist & Analyst with PhD in Computational Physics and 9 peer-reviewed publications.</strong> Skilled in Python, SQL, R, and BI tools, with proven success applying machine learning and statistical modeling to healthcare, finance, and infrastructure domains.
-                                            </p>
-
-                                            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                                                Proven track record of breakthrough research with <strong>9 published papers</strong> in high-impact journals including Physical Review D. Expertise in advanced analytics, machine learning model development, and transforming complex data into actionable business insights.
-                                            </p>
-
-                                            <div className="flex flex-wrap gap-6 pt-6 text-blue-600 dark:text-blue-400">
-                                                <a href="mailto:aryalkris9@gmail.com" className="flex items-center gap-2 hover:text-blue-700 transition-colors hover-scale">
-                                                    {React.createElement(Mail, {className: "w-5 h-5"})}aryalkris9@gmail.com
-                                                </a>
-                                                <a href="tel:+12348175476" className="flex items-center gap-2 hover:text-blue-700 transition-colors hover-scale">
-                                                    {React.createElement(Phone, {className: "w-5 h-5"})}(234) 817-5476
-                                                </a>
-                                                <span className="flex items-center gap-2">
-                                                    {React.createElement(MapPin, {className: "w-5 h-5"})}Kent, OH 44240
+                                        {/* Content */}
+                                        <div className="flex-1 text-center lg:text-left">
+                                            {/* Status Badge */}
+                                            <div className="inline-flex items-center gap-3 bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-800 rounded-full px-6 py-3 mb-8">
+                                                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                                <span className="text-green-700 dark:text-green-300 font-semibold text-lg">
+                                                    US Permanent Resident • Available Immediately
                                                 </span>
-                                                <a href="https://github.com/kraryal" target="_blank" className="flex items-center gap-2 hover:text-blue-700 transition-colors hover-scale">
-                                                    {React.createElement(Github, {className: "w-5 h-5"})}GitHub
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-                                        <div className="flex flex-wrap justify-center gap-3">
-                                            {["Python", "SQL", "R", "Machine Learning", "9 Publications", "PhD Physics", "Statistical Analysis", "Power BI", "Tableau", "Git/GitHub"].map((tech) => (
-                                                <span key={tech} className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors hover-scale">
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Skills Section */}
-                        <section id="skills" className="py-16">
-                            <h2 className="text-4xl font-bold text-center mb-16" style={{background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent'}}>
-                                Technical Skills
-                            </h2>
-                            
-                            <div className="grid md:grid-cols-3 gap-8">
-                                {Object.entries(skills).map(([category, skillList]) => (
-                                    <div key={category} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 hover-scale">
-                                        <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3">
-                                            {category}
-                                        </h3>
-                                        <div className="space-y-6">
-                                            {skillList.map((skill, idx) => (
-                                                <div key={idx} className="space-y-2">
-                                                    <div className="flex items-center justify-between">
-                                                        <span className="font-medium text-gray-900 dark:text-white text-sm">{skill.name}</span>
-                                                        <span className="text-sm text-gray-500 dark:text-gray-400">{skill.level}%</span>
-                                                    </div>
-                                                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                                                        <div 
-                                                            className="h-2 rounded-full transition-all duration-1000 ease-out"
-                                                            style={{ 
-                                                                width: `${skill.level}%`,
-                                                                background: 'linear-gradient(to right, #3b82f6, #8b5cf6)'
-                                                            }}
-                                                        ></div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-
-                        {/* Experience Section */}
-                        <section id="experience" className="py-16">
-                            <h2 className="text-4xl font-bold text-center mb-16" style={{background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent'}}>
-                                Professional Experience
-                            </h2>
-                            
-                            <div className="space-y-8">
-                                {experiences.map((exp, index) => (
-                                    <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover-scale">
-                                        <div className="p-8">
-                                            <div className="flex flex-col lg:flex-row lg:items-start justify-between mb-6">
-                                                <div className="flex-1">
-                                                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{exp.title}</h3>
-                                                    <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300 mb-3">
-                                                        <div className="flex items-center gap-2">
-                                                            {React.createElement(Building, {className: "w-4 h-4"})}
-                                                            <span className="font-semibold">{exp.company}</span>
-                                                        </div>
-                                                        <div className="flex items-center gap-2">
-                                                            {React.createElement(MapPin, {className: "w-4 h-4"})}
-                                                            <span>{exp.location}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 mb-4">
-                                                        {React.createElement(Calendar, {className: "w-4 h-4"})}
-                                                        <span>{exp.period}</span>
-                                                        <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-xs">
-                                                            {exp.type}
-                                                        </span>
-                                                    </div>
-                                                </div>
                                             </div>
 
-                                            <div className="space-y-4 mb-6">
-                                                {exp.achievements.map((achievement, idx) => (
-                                                    <div key={idx} className="flex items-start gap-3">
-                                                        {React.createElement(ChevronRight, {className: "w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0"})}
-                                                        <span className="text-gray-700 dark:text-gray-300">{achievement}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
-
-                                            <div className="flex flex-wrap gap-2">
-                                                {exp.technologies.map((tech, idx) => (
-                                                    <span key={idx} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover-scale">
-                                                        {tech}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-
-                        {/* Projects Section */}
-                        <section id="projects" className="py-16">
-                            <h2 className="text-4xl font-bold text-center mb-16" style={{background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent'}}>
-                                Key Data Science Projects
-                            </h2>
-                            
-                            <div className="grid md:grid-cols-2 gap-8">
-                                {projects.map((project, index) => (
-                                    <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group hover-scale">
-                                        <div className="p-8">
-                                            <div className="flex items-start justify-between mb-4">
-                                                <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                                    {project.title}
-                                                </h3>
-                                                {React.createElement(ExternalLink, {className: "w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"})}
-                                            </div>
-                                            
-                                            <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                                                {project.description}
+                                            <p className="text-2xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
+                                                <strong>PhD Computational Physicist</strong> with <strong>9 peer-reviewed publications</strong> 
+                                                and proven expertise in Python, SQL, ML, and advanced analytics across healthcare, 
+                                                finance, and research domains.
                                             </p>
 
-                                            <div className="space-y-4 mb-6">
-                                                {project.highlights.map((highlight, idx) => (
-                                                    <div key={idx} className="flex items-center gap-3">
-                                                        {React.createElement(CheckCircle, {className: "w-4 h-4 text-green-500"})}
-                                                        <span className="text-gray-700 dark:text-gray-300 text-sm">{highlight}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
-
-                                            <div className="flex flex-wrap gap-2 mb-6">
-                                                {project.technologies.map((tech, idx) => (
-                                                    <span key={idx} className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm hover-scale">
-                                                        {tech}
-                                                    </span>
-                                                ))}
-                                            </div>
-
-                                            <a 
-                                                href={project.link} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium hover-scale"
-                                            >
-                                                {React.createElement(ExternalLink, {className: "w-4 h-4"})}
-                                                View Project
-                                            </a>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-
-                        {/* Contact Section */}
-                        <section id="contact" className="py-16">
-                            <div className="text-center mb-16">
-                                <h2 className="text-4xl font-bold mb-4" style={{background: 'linear-gradient(to right, #2563eb, #9333ea)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent'}}>
-                                    Let's Connect
-                                </h2>
-                                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                                    Ready to leverage advanced analytics and research expertise for your data science needs? Let's discuss opportunities.
-                                </p>
-                            </div>
-
-                            <div className="max-w-4xl mx-auto">
-                                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300">
-                                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Contact Information</h3>
-                                    
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover-scale">
-                                            {React.createElement(Mail, {className: "w-6 h-6 text-blue-600 dark:text-blue-400"})}
-                                            <div>
-                                                <p className="font-medium text-gray-900 dark:text-white">Email</p>
-                                                <a href="mailto:aryalkris9@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">
+                                            {/* Contact Info */}
+                                            <div className="flex flex-wrap justify-center lg:justify-start gap-8 text-blue-600 dark:text-blue-400 text-lg">
+                                                <a href="mailto:aryalkris9@gmail.com" className="flex items-center gap-3 hover:text-blue-700 transition-colors hover-lift">
+                                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                                    </svg>
                                                     aryalkris9@gmail.com
                                                 </a>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover-scale">
-                                            {React.createElement(Phone, {className: "w-6 h-6 text-blue-600 dark:text-blue-400"})}
-                                            <div>
-                                                <p className="font-medium text-gray-900 dark:text-white">Phone</p>
-                                                <a href="tel:+12348175476" className="text-blue-600 dark:text-blue-400 hover:underline">
+                                                <a href="tel:+12348175476" className="flex items-center gap-3 hover:text-blue-700 transition-colors hover-lift">
+                                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                                    </svg>
                                                     (234) 817-5476
                                                 </a>
+                                                <span className="flex items-center gap-3">
+                                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    </svg>
+                                                    Kent, OH
+                                                </span>
+                                                <a href="https://github.com/kraryal" target="_blank" className="flex items-center gap-3 hover:text-blue-700 transition-colors hover-lift">
+                                                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                                    </svg>
+                                                    GitHub
+                                                </a>
                                             </div>
-                                        </div>
 
-                                        <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover-scale">
-                                            {React.createElement(MapPin, {className: "w-6 h-6 text-blue-600 dark:text-blue-400"})}
-                                            <div>
-                                                <p className="font-medium text-gray-900 dark:text-white">Location</p>
-                                                <span className="text-gray-600 dark:text-gray-300">1800 Rhodes Rd, Apt 520, Kent, OH 44240</span>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover-scale">
-                                            {React.createElement(Github, {className: "w-6 h-6 text-blue-600 dark:text-blue-400"})}
-                                            <div>
-                                                <p className="font-medium text-gray-900 dark:text-white">GitHub</p>
-                                                <a href="https://github.com/kraryal" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">
-                                                    github.com/kraryal
+                                            {/* Action Buttons */}
+                                            <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-12">
+                                                <button
+                                                    onClick={viewResume}
+                                                    className="px-8 py-4 bg-blue-600 text-white rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:bg-blue-700 transition-all duration-300 hover-lift"
+                                                >
+                                                    📄 View Resume
+                                                </button>
+                                                <button
+                                                    onClick={downloadResume}
+                                                    className="px-8 py-4 bg-green-600 text-white rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:bg-green-700 transition-all duration-300 hover-lift"
+                                                >
+                                                    ⬇️ Download Resume
+                                                </button>
+                                                <a 
+                                                    href="https://scholar.google.com/citations?user=fsWWqa0AAAAJ" 
+                                                    target="_blank"
+                                                    className="px-8 py-4 bg-purple-600 text-white rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:bg-purple-700 transition-all duration-300 hover-lift"
+                                                >
+                                                    📚 Publications
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="mt-8 text-center">
+                                    {/* Skills Tags */}
+                                    <div className="mt-16 pt-12 border-t border-gray-200 dark:border-gray-700">
                                         <div className="flex flex-wrap justify-center gap-4">
-                                            <button
-                                                onClick={viewResume}
-                                                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 hover-scale"
-                                            >
-                                                📄 View Resume
-                                            </button>
-                                            <button
-                                                onClick={downloadResume}
-                                                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 shadow-lg hover:shadow-xl transition-all duration-300 hover-scale"
-                                            >
-                                                ⬇️ Download Resume
-                                            </button>
-                                            <a 
-                                                href="https://scholar.google.com/citations?user=fsWWqa0AAAAJ" 
-                                                target="_blank"
-                                                className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 shadow-lg hover:shadow-xl transition-all duration-300 hover-scale inline-block"
-                                            >
-                                                📚 Publications
-                                            </a>
+                                            {["Python", "SQL", "R", "Machine Learning", "9 Publications", "PhD Physics", "Statistical Analysis", "Power BI", "Tableau", "GitHub"].map((skill) => (
+                                                <span key={skill} className="px-6 py-3 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 rounded-full font-medium text-lg hover-lift transition-all duration-300 hover:shadow-lg">
+                                                    {skill}
+                                                </span>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
@@ -598,10 +280,13 @@
                     </div>
 
                     {/* Footer */}
-                    <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8 mt-20">
-                        <div className="max-w-6xl mx-auto px-4 text-center">
-                            <p className="text-gray-600 dark:text-gray-400">
+                    <footer className="bg-white dark:bg-gray-800 py-12 mt-20 glass-effect">
+                        <div className="max-w-6xl mx-auto px-6 text-center">
+                            <p className="text-gray-600 dark:text-gray-400 text-lg">
                                 © 2024 Krishna Aryal. All rights reserved. | PhD Computational Physicist & Data Scientist
+                            </p>
+                            <p className="text-gray-500 dark:text-gray-500 mt-2">
+                                Ready to discuss data science opportunities? Let's connect!
                             </p>
                         </div>
                     </footer>
@@ -609,7 +294,7 @@
             );
         }
 
-        // Render the component
+        // Render
         ReactDOM.render(React.createElement(KrishnaResume), document.getElementById('root'));
     </script>
 </body>
