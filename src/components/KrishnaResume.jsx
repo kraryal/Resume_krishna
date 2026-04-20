@@ -310,7 +310,7 @@ export default function KrishnaResume() {
                     <div className="flex items-center gap-3">
                       <div className="bg-green-500 w-3 h-3 rounded-full animate-pulse"></div>
                       <span className="text-green-700 dark:text-green-300 font-semibold">
-                        🟢 US Permanent Resident • Available Immediately • Open to Relocation
+                        {/* 🟢 US Permanent Resident • Available Immediately • Open to Relocation */}
                       </span>
                     </div>
                   </div>
